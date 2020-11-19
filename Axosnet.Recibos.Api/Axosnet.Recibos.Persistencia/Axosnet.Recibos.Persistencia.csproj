@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Axosnet.Recibos.Dominio\Axosnet.Recibos.Dominio.csproj" />
+    <ProjectReference Include="..\Axosnet.Recibos.Seguridad\Axosnet.Recibos.Seguridad.csproj" />
   </ItemGroup>
 
 </Project>

@@ -16,6 +16,7 @@ namespace Axosnet.Recibos.Persistencia
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            InformacionInicial.SeedData(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
 
