@@ -1,5 +1,6 @@
 ﻿using Axosnet.Recibos.Dominio;
 using Axosnet.Recibos.Dominio.Entidad;
+using Axosnet.Recibos.Dominio.Validadores;
 using Axosnet.Recibos.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,11 +14,13 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
     public class UsuarioHelper : IUsuarioHelper
     {
         private readonly RecibosContext _context;
+        private readonly UsuarioValidador _validador;
 
 
         public UsuarioHelper(RecibosContext context)
         {
             _context = context;
+            _validador = new UsuarioValidador();
         }
 
 
@@ -53,6 +56,9 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
         {
             var respuesta = new Respuesta<Usuario>();
 
+            if (!_validador.Validate(usuario).IsValid)
+                throw new ErrorExcepcion(HttpStatusCode.BadRequest, "Favor de validar los campos");
+
             try
             {
                 var existeUsuario = await _context.Usuarios.FindAsync(usuario.Email);
@@ -80,6 +86,9 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
         public async Task<Respuesta<string>> Actualizar(Usuario usuario)
         {
             var respuesta = new Respuesta<string>();
+
+            if (!_validador.Validate(usuario).IsValid)
+                throw new ErrorExcepcion(HttpStatusCode.BadRequest, "Favor de validar los campos");
 
             try
             {
