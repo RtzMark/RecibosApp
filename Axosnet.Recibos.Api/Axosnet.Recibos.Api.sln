@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axosnet.Recibos.Api", "Axosnet.Recibos.Api\Axosnet.Recibos.Api.csproj", "{CAC51248-60AE-4907-9CFF-930EF4D5AC78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axosnet.Recibos.Api", "Axosnet.Recibos.Api\Axosnet.Recibos.Api.csproj", "{CAC51248-60AE-4907-9CFF-930EF4D5AC78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axosnet.Recibos.Persistencia", "Axosnet.Recibos.Persistencia\Axosnet.Recibos.Persistencia.csproj", "{A80B770F-08F3-4AE2-B916-952AD7B12A79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{CAC51248-60AE-4907-9CFF-930EF4D5AC78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAC51248-60AE-4907-9CFF-930EF4D5AC78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAC51248-60AE-4907-9CFF-930EF4D5AC78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A80B770F-08F3-4AE2-B916-952AD7B12A79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A80B770F-08F3-4AE2-B916-952AD7B12A79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A80B770F-08F3-4AE2-B916-952AD7B12A79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A80B770F-08F3-4AE2-B916-952AD7B12A79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
