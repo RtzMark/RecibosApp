@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Axosnet.Recibos.Aplicacion;
+using Axosnet.Recibos.Dominio;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -28,27 +30,32 @@ namespace Axosnet.Recibos.Api.Middleware
             }
             catch (Exception ex)
             {
-                await ManejadorExcepcionAsincrono(context, ex, _logger);
+                await ErrorMiddlewareAsync(context, ex, _logger);
             }
         }
 
-        private async Task ManejadorExcepcionAsincrono(HttpContext context, Exception ex, ILogger<ErrorMiddleware> logger)
+        private async Task ErrorMiddlewareAsync(HttpContext context, Exception ex, ILogger<ErrorMiddleware> logger)
         {
-            object errores = null;
+            var respuesta = new Respuesta<string>() { error = true, datos = "" };
+
             switch (ex)
             {
+                case ErrorExcepcion me:
+                    logger.LogError(ex, "Error de Proceso");
+                    respuesta.mensaje = me.Error;
+                    context.Response.StatusCode = (int)me.Codigo;
+                    break;
                 case Exception e:
                     logger.LogError(ex, "Error de Servidor");
-                    errores = string.IsNullOrWhiteSpace(e.Message) ? "Error" : e.Message;
+                    respuesta.mensaje = string.IsNullOrWhiteSpace(e.Message) ? "Error" : e.Message;
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     break;
             }
+
             context.Response.ContentType = "application/json";
-            if (errores != null)
-            {
-                var resultados = JsonConvert.SerializeObject(new { errores });
-                await context.Response.WriteAsync(resultados);
-            }
+
+            var resultados = JsonConvert.SerializeObject(respuesta);
+            await context.Response.WriteAsync(resultados);
         }
     }
 }
