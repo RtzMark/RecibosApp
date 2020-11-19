@@ -29,7 +29,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
         {
             var respuesta = new Respuesta<List<Usuario>>();
 
-            respuesta.datos = await _context.Usuarios.ToListAsync();
+            respuesta.datos = await _context.Usuarios.Where(x => x.Activo).ToListAsync();
             respuesta.mensaje = "Usuarios obtenidos correctamente";
 
             return respuesta;
@@ -80,7 +80,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
                 await _context.SaveChangesAsync();
 
                 respuesta.mensaje = "Usuario agregado correctamente";
-                respuesta.datos = existeUsuario;
+                respuesta.datos = usuario;
             }
             catch (Exception ex)
             {
@@ -100,12 +100,12 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
 
             try
             {
-                var existeUsuario = await _context.Usuarios.FindAsync(usuario.Id);
+                var existeUsuario = await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Id == usuario.Id);
 
                 if (existeUsuario == null)
                     throw new ErrorExcepcion(HttpStatusCode.NotFound, "No existe el usuario que desea actualizar");
 
-                var existeUsuarioEmail = await _context.Usuarios.Where(x => x.Email == usuario.Email).FirstOrDefaultAsync();
+                var existeUsuarioEmail = await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Email == usuario.Email && x.Id != usuario.Id);
 
                 if (existeUsuarioEmail != null)
                 {
@@ -114,11 +114,13 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
                 }
 
                 usuario.Clave = Cifrado.EncryptSHA256(usuario.Clave);
+
                 _context.Entry(usuario).State = EntityState.Modified;
+
                 await _context.SaveChangesAsync();
 
                 respuesta.mensaje = "Usuario actualizado correctamente";
-                respuesta.datos = existeUsuario;
+                respuesta.datos = usuario;
             }
             catch (Exception ex)
             {
@@ -135,7 +137,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
 
             try
             {
-                var existeUsuario = await _context.Usuarios.FindAsync(idUsuario);
+                var existeUsuario = await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Id == idUsuario);
 
                 if (existeUsuario == null)
                     throw new ErrorExcepcion(HttpStatusCode.NotFound, "No existe el usuario que desea eliminar");
