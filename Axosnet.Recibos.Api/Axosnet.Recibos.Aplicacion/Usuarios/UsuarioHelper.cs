@@ -62,12 +62,14 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
 
             try
             {
-                var existeUsuario = await _context.Usuarios.FindAsync(usuario.Email);
+                var existeUsuario = await _context.Usuarios.Where(x => x.Email == usuario.Email).FirstOrDefaultAsync();
 
                 if (existeUsuario != null)
                 {
                     respuesta.error = true;
                     respuesta.mensaje = "Ya existe email";
+
+                    return respuesta;
                 }
 
                 usuario.Id = Guid.NewGuid();
@@ -75,6 +77,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
                 usuario.Activo = true;
 
                 await _context.AddAsync(usuario);
+                await _context.SaveChangesAsync();
 
                 respuesta.mensaje = "Usuario agregado correctamente";
                 respuesta.datos = existeUsuario;
@@ -102,7 +105,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
                 if (existeUsuario == null)
                     throw new ErrorExcepcion(HttpStatusCode.NotFound, "No existe el usuario que desea actualizar");
 
-                var existeUsuarioEmail = await _context.Usuarios.FindAsync(usuario.Email);
+                var existeUsuarioEmail = await _context.Usuarios.Where(x => x.Email == usuario.Email).FirstOrDefaultAsync();
 
                 if (existeUsuarioEmail != null)
                 {
