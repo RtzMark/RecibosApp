@@ -72,6 +72,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
 
                 usuario.Id = Guid.NewGuid();
                 usuario.Clave = Cifrado.EncryptSHA256(usuario.Clave);
+                usuario.Activo = true;
 
                 await _context.AddAsync(usuario);
 
