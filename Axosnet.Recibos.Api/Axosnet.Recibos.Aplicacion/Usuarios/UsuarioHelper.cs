@@ -120,7 +120,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
             return respuesta;
         }
 
-        public async Task<Respuesta<Usuario>> Eliminar(int idUsuario)
+        public async Task<Respuesta<Usuario>> Eliminar(Guid idUsuario)
         {
             var respuesta = new Respuesta<Usuario>();
 
