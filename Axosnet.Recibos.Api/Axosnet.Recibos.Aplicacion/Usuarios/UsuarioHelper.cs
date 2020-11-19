@@ -2,6 +2,7 @@
 using Axosnet.Recibos.Dominio.Entidad;
 using Axosnet.Recibos.Dominio.Validadores;
 using Axosnet.Recibos.Persistencia;
+using Axosnet.Recibos.Seguridad.Crypt;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -69,6 +70,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
                     respuesta.mensaje = "Ya existe email";
                 }
 
+                usuario.Clave = Cifrado.EncryptSHA256(usuario.Clave);
                 await _context.AddAsync(usuario);
 
                 respuesta.mensaje = "Usuario agregado correctamente";
@@ -105,6 +107,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
                     respuesta.mensaje = "Ya existe email";
                 }
 
+                usuario.Clave = Cifrado.EncryptSHA256(usuario.Clave);
                 _context.Entry(usuario).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
 
