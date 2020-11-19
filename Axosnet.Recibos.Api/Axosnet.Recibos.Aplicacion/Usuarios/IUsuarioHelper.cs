@@ -11,7 +11,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
         Task<Respuesta<List<Usuario>>> ObtenerUsuarios();
         Task<Respuesta<Usuario>> ObtenerUsuario(Guid idUsuario);
         Task<Respuesta<Usuario>> Agregar(Usuario usuario);
-        Task<Respuesta<string>> Actualizar(Usuario usuario);
-        Task<Respuesta<string>> Eliminar(int idUsuario);
+        Task<Respuesta<Usuario>> Actualizar(Usuario usuario);
+        Task<Respuesta<Usuario>> Eliminar(int idUsuario);
     }
 }

@@ -83,9 +83,9 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
             return respuesta;
         }
 
-        public async Task<Respuesta<string>> Actualizar(Usuario usuario)
+        public async Task<Respuesta<Usuario>> Actualizar(Usuario usuario)
         {
-            var respuesta = new Respuesta<string>();
+            var respuesta = new Respuesta<Usuario>();
 
             if (!_validador.Validate(usuario).IsValid)
                 throw new ErrorExcepcion(HttpStatusCode.BadRequest, "Favor de validar los campos");
@@ -109,6 +109,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
                 await _context.SaveChangesAsync();
 
                 respuesta.mensaje = "Usuario actualizado correctamente";
+                respuesta.datos = existeUsuario;
             }
             catch (Exception ex)
             {
@@ -119,9 +120,9 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
             return respuesta;
         }
 
-        public async Task<Respuesta<string>> Eliminar(int idUsuario)
+        public async Task<Respuesta<Usuario>> Eliminar(int idUsuario)
         {
-            var respuesta = new Respuesta<string>();
+            var respuesta = new Respuesta<Usuario>();
 
             try
             {
@@ -135,6 +136,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
                 await _context.SaveChangesAsync();
 
                 respuesta.mensaje = "Usuario eliminado correctamente";
+                respuesta.datos = existeUsuario;
             }
             catch (Exception ex)
             {
