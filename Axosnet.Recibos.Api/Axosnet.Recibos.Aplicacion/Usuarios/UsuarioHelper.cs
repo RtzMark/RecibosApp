@@ -135,13 +135,13 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
         {
             var respuesta = new Respuesta<Usuario>();
 
+            var existeUsuario = await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Id == idUsuario && x.Activo);
+
+            if (existeUsuario == null)
+                throw new ErrorExcepcion(HttpStatusCode.NotFound, "No existe el usuario que desea eliminar");
+
             try
             {
-                var existeUsuario = await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Id == idUsuario);
-
-                if (existeUsuario == null)
-                    throw new ErrorExcepcion(HttpStatusCode.NotFound, "No existe el usuario que desea eliminar");
-
                 existeUsuario.Activo = false;
                 _context.Entry(existeUsuario).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
