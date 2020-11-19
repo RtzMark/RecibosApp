@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axosnet.Recibos.Dominio", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axosnet.Recibos.Seguridad", "Axosnet.Recibos.Seguridad\Axosnet.Recibos.Seguridad.csproj", "{1E617426-4B78-4F1F-A29D-84DD3773CFB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axosnet.Recibos.Aplicacion", "Axosnet.Recibos.Aplicacion\Axosnet.Recibos.Aplicacion.csproj", "{9AFE3014-E3CF-4F2E-9698-CE058D99231B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axosnet.Recibos.Aplicacion", "Axosnet.Recibos.Aplicacion\Axosnet.Recibos.Aplicacion.csproj", "{9AFE3014-E3CF-4F2E-9698-CE058D99231B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axosnet.Recibos.Test", "Axosnet.Recibos.Test\Axosnet.Recibos.Test.csproj", "{B2497F18-1BFE-404C-8B9F-95602F93127D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{9AFE3014-E3CF-4F2E-9698-CE058D99231B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AFE3014-E3CF-4F2E-9698-CE058D99231B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AFE3014-E3CF-4F2E-9698-CE058D99231B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2497F18-1BFE-404C-8B9F-95602F93127D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2497F18-1BFE-404C-8B9F-95602F93127D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2497F18-1BFE-404C-8B9F-95602F93127D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2497F18-1BFE-404C-8B9F-95602F93127D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
