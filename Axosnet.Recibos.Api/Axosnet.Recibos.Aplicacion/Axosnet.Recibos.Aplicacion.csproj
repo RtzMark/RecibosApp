@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Axosnet.Recibos.Dominio\Axosnet.Recibos.Dominio.csproj" />
+    <ProjectReference Include="..\Axosnet.Recibos.Persistencia\Axosnet.Recibos.Persistencia.csproj" />
+  </ItemGroup>
+
+</Project>
