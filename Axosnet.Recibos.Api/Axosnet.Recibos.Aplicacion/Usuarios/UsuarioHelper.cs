@@ -70,7 +70,9 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
                     respuesta.mensaje = "Ya existe email";
                 }
 
+                usuario.Id = Guid.NewGuid();
                 usuario.Clave = Cifrado.EncryptSHA256(usuario.Clave);
+
                 await _context.AddAsync(usuario);
 
                 respuesta.mensaje = "Usuario agregado correctamente";
