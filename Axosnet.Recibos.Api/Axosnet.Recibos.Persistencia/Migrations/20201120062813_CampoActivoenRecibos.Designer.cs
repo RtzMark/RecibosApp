@@ -4,14 +4,16 @@ using Axosnet.Recibos.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Axosnet.Recibos.Persistencia.Migrations
 {
     [DbContext(typeof(RecibosContext))]
-    partial class RecibosContextModelSnapshot : ModelSnapshot
+    [Migration("20201120062813_CampoActivoenRecibos")]
+    partial class CampoActivoenRecibos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
