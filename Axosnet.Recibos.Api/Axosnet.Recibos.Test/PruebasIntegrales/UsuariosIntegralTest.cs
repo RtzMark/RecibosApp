@@ -28,7 +28,7 @@ namespace Axosnet.Recibos.Test.PruebasUnitarias
             contexto.Usuarios.Add(
                 new Usuario
                 {
-                    Id = new Guid("F5ADB2A7-A0AF-4D9F-B626-18DE5A3F1801"),
+                    Id = Guid.NewGuid(),
                     Email = "usuario@axosnet.com",
                     Nombre = "Marco",
                     Clave = "Prueba123",
@@ -52,9 +52,10 @@ namespace Axosnet.Recibos.Test.PruebasUnitarias
             var factory = ConstruirWebApplicationFactory(dbNombre);
 
             var contexto = ConstruirContext(dbNombre);
+            var guid = Guid.NewGuid();
             var usuario = new Usuario
             {
-                Id = new Guid("F5ADB2A7-A0AF-4D9F-B626-18DE5A3F1801"),
+                Id = guid,
                 Email = "usuario@axosnet.com",
                 Nombre = "Marco",
                 Clave = "Prueba123",
@@ -65,7 +66,7 @@ namespace Axosnet.Recibos.Test.PruebasUnitarias
             await contexto.SaveChangesAsync();
 
             var cliente = factory.CreateClient();
-            var respuesta = await cliente.GetAsync($"{url}/F5ADB2A7-A0AF-4D9F-B626-18DE5A3F1801");
+            var respuesta = await cliente.GetAsync($"{url}/{guid}");
 
             respuesta.EnsureSuccessStatusCode();
 
@@ -80,11 +81,13 @@ namespace Axosnet.Recibos.Test.PruebasUnitarias
             var factory = ConstruirWebApplicationFactory(dbNombre);
 
             var contexto = ConstruirContext(dbNombre);
+            var guid = Guid.NewGuid();
+
             contexto.Usuarios.Add(
                 new Usuario
                 {
-                    Id = new Guid("F5ADB2A7-A0AF-4D9F-B626-18DE5A3F1801"),
-                    Email = "usuario@axosnet.com",
+                    Id = guid,
+                    Email = "admin@axosnet.com",
                     Nombre = "Marco",
                     Clave = "Prueba123",
                     Activo = true
@@ -93,8 +96,8 @@ namespace Axosnet.Recibos.Test.PruebasUnitarias
 
             var usuarioActualizar = new Usuario
             {
-                Id = new Guid("F5ADB2A7-A0AF-4D9F-B626-18DE5A3F1801"),
-                Email = "usuario@axosnet.com",
+                Id = guid,
+                Email = "admin@axosnet.com",
                 Nombre = "Marco Retiz",
                 Clave = "Prueba123"
             };
