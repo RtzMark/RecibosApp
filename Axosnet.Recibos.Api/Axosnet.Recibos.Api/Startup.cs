@@ -29,6 +29,8 @@ namespace Axosnet.Recibos.Api
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            services.Configure<TokenConfiguracion>(Configuration.GetSection("jwt"));
+
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddScoped<ITokenGenerador, TokenGenerador>();
