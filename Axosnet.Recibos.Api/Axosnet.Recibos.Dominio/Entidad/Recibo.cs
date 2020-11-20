@@ -12,5 +12,6 @@ namespace Axosnet.Recibos.Dominio.Entidad
         public string Moneda { get; set; }
         public DateTime Fecha { get; set; }
         public string Comentario { get; set; }
+        public bool Activo { get; set; }
     }
 }
