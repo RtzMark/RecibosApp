@@ -1,5 +1,6 @@
 ﻿using Axosnet.Recibos.Aplicacion.Acceso;
 using Axosnet.Recibos.Dominio;
+using Axosnet.Recibos.Dominio.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Axosnet.Recibos.Api.Controllers
@@ -18,9 +19,9 @@ namespace Axosnet.Recibos.Api.Controllers
 
 
         [HttpPost("Login")]
-        public ActionResult<Respuesta<string>> Login([FromBody] string email, [FromBody] string clave)
+        public ActionResult<Respuesta<string>> Login([FromBody] DatosLogin datos)
         {
-            return _accesoHelper.Login(email, clave);
+            return _accesoHelper.Login(datos.Email, datos.Clave);
         }
     }
 }
