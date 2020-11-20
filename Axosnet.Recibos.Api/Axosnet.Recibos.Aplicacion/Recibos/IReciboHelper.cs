@@ -2,15 +2,16 @@
 using Axosnet.Recibos.Dominio.Entidad;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Axosnet.Recibos.Aplicacion.Recibos
 {
     public interface IReciboHelper
     {
-        Respuesta<IEnumerable<Recibo>> ObtenerRecibos();
-        Respuesta<Recibo> ObtenerRecibo(Guid idRecibo);
-        Respuesta<Recibo> Agregar(Recibo recibo);
-        Respuesta<string> Actualizar(Recibo recibo);
-        Respuesta<string> Eliminar(Guid idRecibo);
+        Task<Respuesta<List<Recibo>>> ObtenerRecibos();
+        Task<Respuesta<Recibo>> ObtenerRecibo(int idRecibo);
+        Task<Respuesta<Recibo>> Agregar(Recibo recibo);
+        Task<Respuesta<Recibo>> Actualizar(Recibo recibo);
+        Task<Respuesta<Recibo>> Eliminar(int idRecibo);
     }
 }
