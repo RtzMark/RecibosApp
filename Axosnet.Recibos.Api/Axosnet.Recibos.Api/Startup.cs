@@ -4,12 +4,17 @@ using Axosnet.Recibos.Aplicacion.Recibos;
 using Axosnet.Recibos.Aplicacion.Usuarios;
 using Axosnet.Recibos.Persistencia;
 using Axosnet.Recibos.Seguridad.Token;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Axosnet.Recibos.Api
 {
@@ -34,9 +39,25 @@ namespace Axosnet.Recibos.Api
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.Configure<TokenConfiguracion>(Configuration.GetSection("jwt"));
+            services.AddControllers(opt =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                opt.Filters.Add(new AuthorizeFilter(policy));
+            }).AddNewtonsoftJson();
 
-            services.AddControllers().AddNewtonsoftJson();
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("cnzxDTt2ZHsR5tJh4BFRktnS6SdpFqhdwnkJc6atfBbZqxpmZe"));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+            {
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = key,
+                    ValidateAudience = false,
+                    ValidateIssuer = false
+                };
+            });
+
+            services.Configure<TokenConfiguracion>(Configuration.GetSection("jwt"));
 
             services.AddScoped<ITokenGenerador, TokenGenerador>();
 
@@ -55,6 +76,8 @@ namespace Axosnet.Recibos.Api
             {
                 //app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
 
