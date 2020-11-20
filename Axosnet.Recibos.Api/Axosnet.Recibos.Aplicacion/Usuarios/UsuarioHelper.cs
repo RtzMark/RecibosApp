@@ -98,13 +98,13 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
             if (!_validador.Validate(usuario).IsValid)
                 throw new ErrorExcepcion(HttpStatusCode.BadRequest, "Favor de validar los campos");
 
+            var existeUsuario = await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Id == usuario.Id);
+
+            if (existeUsuario == null)
+                throw new ErrorExcepcion(HttpStatusCode.NotFound, "No existe el usuario que desea actualizar");
+
             try
             {
-                var existeUsuario = await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Id == usuario.Id);
-
-                if (existeUsuario == null)
-                    throw new ErrorExcepcion(HttpStatusCode.NotFound, "No existe el usuario que desea actualizar");
-
                 var existeUsuarioEmail = await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Email == usuario.Email && x.Id != usuario.Id);
 
                 if (existeUsuarioEmail != null)

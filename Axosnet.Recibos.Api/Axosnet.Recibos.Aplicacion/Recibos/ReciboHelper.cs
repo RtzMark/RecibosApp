@@ -85,13 +85,13 @@ namespace Axosnet.Recibos.Aplicacion.Recibos
             if (!_validador.Validate(recibo).IsValid)
                 throw new ErrorExcepcion(HttpStatusCode.BadRequest, "Favor de validar los campos");
 
+            var existeRecibo = await _context.Recibos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == recibo.Id);
+
+            if (existeRecibo == null)
+                throw new ErrorExcepcion(HttpStatusCode.NotFound, "No existe el recibo que desea actualizar");
+
             try
             {
-                var existeRecibo = await _context.Recibos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == recibo.Id);
-
-                if (existeRecibo == null)
-                    throw new ErrorExcepcion(HttpStatusCode.NotFound, "No existe el recibo que desea actualizar");
-
                 _context.Entry(recibo).State = EntityState.Modified;
 
                 await _context.SaveChangesAsync();
