@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Axosnet.Recibos.Api.Middleware;
+using Axosnet.Recibos.Aplicacion.Recibos;
 using Axosnet.Recibos.Aplicacion.Usuarios;
 using Axosnet.Recibos.Persistencia;
 using Microsoft.AspNetCore.Builder;
@@ -36,6 +37,7 @@ namespace Axosnet.Recibos.Api
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddTransient<IUsuarioHelper, UsuarioHelper>();
+            services.AddTransient<IReciboHelper, ReciboHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
