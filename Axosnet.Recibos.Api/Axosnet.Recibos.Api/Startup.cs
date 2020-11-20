@@ -1,20 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Axosnet.Recibos.Api.Middleware;
+using Axosnet.Recibos.Aplicacion.Acceso;
 using Axosnet.Recibos.Aplicacion.Recibos;
 using Axosnet.Recibos.Aplicacion.Usuarios;
 using Axosnet.Recibos.Persistencia;
+using Axosnet.Recibos.Seguridad.Token;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Axosnet.Recibos.Api
 {
@@ -36,6 +31,9 @@ namespace Axosnet.Recibos.Api
 
             services.AddControllers().AddNewtonsoftJson();
 
+            services.AddScoped<ITokenGenerador, TokenGenerador>();
+
+            services.AddTransient<IAccesoHelper, AccesoHelper>();
             services.AddTransient<IUsuarioHelper, UsuarioHelper>();
             services.AddTransient<IReciboHelper, ReciboHelper>();
         }
