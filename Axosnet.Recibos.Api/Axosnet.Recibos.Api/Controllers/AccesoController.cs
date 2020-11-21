@@ -21,7 +21,7 @@ namespace Axosnet.Recibos.Api.Controllers
 
 
         [HttpPost("Login")]
-        public ActionResult<Respuesta<string>> Login([FromBody] DatosLogin datos)
+        public ActionResult<Respuesta<DatosRespuestaLogin>> Login([FromBody] DatosLogin datos)
         {
             return _accesoHelper.Login(datos.Email, datos.Clave);
         }
