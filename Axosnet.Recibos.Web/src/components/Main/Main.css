@@ -1,0 +1,23 @@
+main {
+  display: block;
+}
+
+.Main {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.Main--center {
+  -webkit-justify-content: center;
+  justify-content: center;
+}
