@@ -1,13 +1,11 @@
 import React, { useState, useContext } from "react";
-import Axios from "axios";
 
+import HttpCliente from "../services/HttpCliente";
 import { AuthContext } from "../auth/auth-context";
-import { initAxiosInterceptar } from "../auth/auth-helpers";
+import { setToken } from "../auth/auth-helpers";
 import { types } from "../types/types";
 
 import Main from "../components/Main/Main";
-
-initAxiosInterceptar();
 
 const Login = () => {
   const { dispatch } = useContext(AuthContext);
@@ -27,12 +25,13 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const { error, mensaje, datos } = await Axios.post(
-        "http://localhost:52234/api/Acceso/Login",
+      const { error, mensaje, datos } = await HttpCliente.post(
+        "Acceso/Login",
         datosLogin
       );
 
       if (!error) {
+        setToken(datos.token);
         dispatch({
           type: types.login,
           payload: {
