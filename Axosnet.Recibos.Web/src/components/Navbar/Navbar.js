@@ -6,6 +6,8 @@ import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../../auth/auth-context";
 import { types } from "../../types/types";
 
+import { eliminarToken } from "../../auth/auth-helpers";
+
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -18,6 +20,7 @@ const Navbar = () => {
   const handleLogout = () => {
     history.replace("/login");
 
+    eliminarToken();
     dispatch({
       type: types.logout,
     });
