@@ -1,3 +1,4 @@
+../Axosnet.Recibos.Web/
 .vs/
 
 *.swp
@@ -34,3 +35,5 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+========
+>>>>>>>> dev-api:.gitignore

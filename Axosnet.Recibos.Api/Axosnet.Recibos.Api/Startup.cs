@@ -2,6 +2,7 @@ using Axosnet.Recibos.Api.Middleware;
 using Axosnet.Recibos.Aplicacion.Acceso;
 using Axosnet.Recibos.Aplicacion.Recibos;
 using Axosnet.Recibos.Aplicacion.Usuarios;
+using Axosnet.Recibos.Aplicacion.UsuarioSesion;
 using Axosnet.Recibos.Persistencia;
 using Axosnet.Recibos.Seguridad.Token;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -62,6 +63,7 @@ namespace Axosnet.Recibos.Api
             services.AddScoped<ITokenGenerador, TokenGenerador>();
 
             services.AddTransient<IAccesoHelper, AccesoHelper>();
+            services.AddTransient<IUsuarioSesionHelper, UsuarioSesionHelper>();
             services.AddTransient<IUsuarioHelper, UsuarioHelper>();
             services.AddTransient<IReciboHelper, ReciboHelper>();
         }
