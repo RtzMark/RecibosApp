@@ -1,4 +1,5 @@
 ﻿using Axosnet.Recibos.Dominio;
+using Axosnet.Recibos.Dominio.Model;
 using Axosnet.Recibos.Persistencia;
 using Axosnet.Recibos.Seguridad.Crypt;
 using Axosnet.Recibos.Seguridad.Token;
@@ -20,9 +21,9 @@ namespace Axosnet.Recibos.Aplicacion.Acceso
         }
 
 
-        public Respuesta<string> Login(string email, string clave)
+        public Respuesta<DatosRespuestaLogin> Login(string email, string clave)
         {
-            var respuesta = new Respuesta<string>();
+            var respuesta = new Respuesta<DatosRespuestaLogin>();
 
             clave = Cifrado.EncryptSHA256(clave);
 
@@ -35,8 +36,15 @@ namespace Axosnet.Recibos.Aplicacion.Acceso
                 return respuesta;
             }
 
-            var token = _tokenGenerador.CrearToken(email, usuario.Id);
-            respuesta.datos = token;
+            respuesta.datos = new DatosRespuestaLogin
+            {
+                Token = _tokenGenerador.CrearToken(usuario.Email, usuario.Nombre, usuario.Id),
+                Usuario = new DatosRespuestaUsuario
+                {
+                    Email = usuario.Email,
+                    Nombre = usuario.Nombre
+                }
+            };
             respuesta.mensaje = "Usuario logeado correctamente";
 
             return respuesta;
