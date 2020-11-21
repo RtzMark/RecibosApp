@@ -1,14 +1,50 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+
+import { AuthContext } from "../../auth/auth-context";
+import { types } from "../../types/types";
+
 import "./Navbar.css";
 
 const Navbar = () => {
+  const {
+    user: { email },
+    dispatch,
+  } = useContext(AuthContext);
+  const history = useHistory();
+
+  const handleLogout = () => {
+    history.replace("/login");
+
+    dispatch({
+      type: types.logout,
+    });
+  };
+
   return (
     <nav className="Nav">
       <ul className="Nav__links">
         <li>
-          <a href="/" className="Nav__link">
+          <Link className="Nav__link" to="/recibos">
             Recibos
-          </a>
+          </Link>
+        </li>
+        <li className="Nav__link-margin-left">
+          <Link className="Nav__link" to="/usuarios">
+            Usuarios
+          </Link>
+        </li>
+        <li className="Nav__link-push">
+          <Link className="Nav__link" to="/">
+            {email}
+          </Link>
+        </li>
+        <li className="Nav__link-margin-left">
+          <button className="Nav__link" onClick={handleLogout}>
+            <FontAwesomeIcon icon={faSignOutAlt} />
+          </button>
         </li>
       </ul>
     </nav>
