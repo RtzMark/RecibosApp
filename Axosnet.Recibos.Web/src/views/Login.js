@@ -6,6 +6,7 @@ import { setToken } from "../auth/auth-helpers";
 import { types } from "../types/types";
 
 import Main from "../components/Main/Main";
+import Error from "../components/Errorbar/Error";
 
 const Login = () => {
   const { dispatch } = useContext(AuthContext);
@@ -13,6 +14,7 @@ const Login = () => {
     email: "",
     clave: "",
   });
+  const [error, setError] = useState(null);
 
   const handleInputChange = (e) => {
     setDatosLogin({
@@ -38,43 +40,56 @@ const Login = () => {
             email: datos.usuario.email,
           },
         });
+      } else {
+        mostrarError(mensaje);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
+  const mostrarError = (mensaje) => {
+    setError(mensaje);
+  };
+
+  const ocultarError = () => {
+    setError(null);
+  };
+
   return (
-    <Main center>
-      <div className="FormContainer">
-        <h1 className="Form__titulo">Recibos App</h1>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              className="Form__field"
-              required
-              onChange={handleInputChange}
-              value={datosLogin.email}
-            />
-            <input
-              type="password"
-              name="clave"
-              placeholder="Contraseña"
-              className="Form__field"
-              required
-              onChange={handleInputChange}
-              value={datosLogin.clave}
-            />
-            <button type="submit" className="Form__submit Login__Button">
-              Login
-            </button>
-          </form>
+    <>
+      <Error mensaje={error} esconderError={ocultarError} />
+      <Main center>
+        <div className="FormContainer">
+          <h1 className="Form__titulo">Recibos App</h1>
+          <div>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                className="Form__field"
+                required
+                onChange={handleInputChange}
+                value={datosLogin.email}
+              />
+              <input
+                type="password"
+                name="clave"
+                placeholder="Contraseña"
+                className="Form__field"
+                required
+                onChange={handleInputChange}
+                value={datosLogin.clave}
+              />
+              <button type="submit" className="Form__submit Login__Button">
+                Login
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-    </Main>
+      </Main>
+    </>
   );
 };
 
