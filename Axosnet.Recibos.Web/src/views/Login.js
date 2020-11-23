@@ -7,6 +7,7 @@ import { types } from "../types/types";
 
 import Main from "../components/Main/Main";
 import Error from "../components/Errorbar/Error";
+import Loading from "../components/Loading/Loading";
 
 const Login = () => {
   const { dispatch } = useContext(AuthContext);
@@ -15,6 +16,7 @@ const Login = () => {
     clave: "",
   });
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     setDatosLogin({
@@ -26,6 +28,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
     try {
       const { error, mensaje, datos } = await HttpCliente.post(
         "Acceso/Login",
@@ -46,6 +49,8 @@ const Login = () => {
     } catch (error) {
       console.log(error);
     }
+
+    setLoading(false);
   };
 
   const mostrarError = (mensaje) => {
@@ -55,6 +60,14 @@ const Login = () => {
   const ocultarError = () => {
     setError(null);
   };
+
+  if (loading) {
+    return (
+      <Main>
+        <Loading />
+      </Main>
+    );
+  }
 
   return (
     <>
