@@ -23,7 +23,6 @@ const RecibosApp = () => {
 
   useEffect(() => {
     const cargarUsuario = async () => {
-      console.log(user.logged);
       if (user.logged) {
         try {
           const { error, datos } = await HttpCliente.get("Usuario");
