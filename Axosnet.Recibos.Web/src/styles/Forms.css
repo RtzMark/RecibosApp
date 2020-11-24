@@ -35,7 +35,17 @@
   border-radius: 0.25rem;
   margin: 0.5rem auto 1rem;
   padding: 0.5rem 1rem;
+  width: 100%;
 }
+
+.Form__button {
+  color: #fff;
+  background-color: #3490dc;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  width: 15%;
+}
+
 .FormContainer__info {
   text-align: center;
   margin-bottom: 1rem;
