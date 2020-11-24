@@ -15,7 +15,7 @@ import {
   EliminarUsuarioAync,
 } from "../actions/UsuariosAction";
 
-const Usuarios = ({ mostrarError }) => {
+const Usuarios = ({ setError }) => {
   const [loading, setLoading] = useState(false);
   const [listadoUsuario, setListadoUsuario] = useState([]);
   const [estatusModal, setEstatusModal] = useState(false);
@@ -36,7 +36,7 @@ const Usuarios = ({ mostrarError }) => {
     const { error, mensaje, datos } = await ObtenerUsuariosAync();
 
     if (error) {
-      mostrarError(mensaje);
+      setError(mensaje);
       setListadoUsuario(null);
     } else {
       setListadoUsuario(datos);
@@ -93,7 +93,7 @@ const Usuarios = ({ mostrarError }) => {
   const cargardatosUsuario = (id) => {
     ObtenerUsuarioAync(id).then(({ error, mensaje, datos }) => {
       if (error) {
-        mostrarError(mensaje);
+        setError(mensaje);
       } else {
         setEstatusModal(!estatusModal);
         setDatosUsuario(datos);
@@ -127,7 +127,7 @@ const Usuarios = ({ mostrarError }) => {
   const eliminarUsuario = (id) => {
     EliminarUsuarioAync(id).then(({ error, mensaje, datos }) => {
       if (error) {
-        mostrarError(mensaje);
+        setError(mensaje);
       } else {
         setDatosUsuario(datos);
         ObtenerUsuarios();

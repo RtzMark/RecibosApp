@@ -16,7 +16,7 @@ import {
   EliminarReciboAync,
 } from "../actions/RecibosAction";
 
-const Recibos = ({ mostrarError }) => {
+const Recibos = ({ setError }) => {
   const [loading, setLoading] = useState(false);
   const [listadoRecibo, setListadoRecibo] = useState([]);
   const [estatusModal, setEstatusModal] = useState(false);
@@ -37,7 +37,7 @@ const Recibos = ({ mostrarError }) => {
     const { error, mensaje, datos } = await ObtenerRecibosAync();
 
     if (error) {
-      mostrarError(mensaje);
+      setError(mensaje);
       setListadoRecibo(null);
     } else {
       setListadoRecibo(datos);
@@ -96,7 +96,7 @@ const Recibos = ({ mostrarError }) => {
   const cargarDatosRecibo = (id) => {
     ObtenerReciboAync(id).then(({ error, mensaje, datos }) => {
       if (error) {
-        mostrarError(mensaje);
+        setError(mensaje);
       } else {
         setEstatusModal(!estatusModal);
         datos.fecha = Moment(datos.fecha).format("YYYY-MM-DD");
@@ -130,7 +130,7 @@ const Recibos = ({ mostrarError }) => {
   const eliminarRecibo = (id) => {
     EliminarReciboAync(id).then(({ error, mensaje, datos }) => {
       if (error) {
-        mostrarError(mensaje);
+        setError(mensaje);
       } else {
         setdatosRecibo(datos);
         ObtenerRecibos();

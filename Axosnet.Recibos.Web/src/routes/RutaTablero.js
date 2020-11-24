@@ -11,10 +11,6 @@ import Home from "../views/Home";
 const RutaTablero = () => {
   const [error, setError] = useState();
 
-  const mostrarError = (mensaje) => {
-    setError(mensaje);
-  };
-
   const ocultarError = () => {
     setError(null);
   };
@@ -28,11 +24,11 @@ const RutaTablero = () => {
           <Route path="/Inicio" render={(props) => <Home />} default />
           <Route
             path="/recibos"
-            render={(props) => <Recibos mostrarError={mostrarError} />}
+            render={(props) => <Recibos setError={setError} />}
           />
           <Route
             path="/usuarios"
-            render={(props) => <Usuarios mostrarError={mostrarError} />}
+            render={(props) => <Usuarios setError={setError} />}
           />
           <Redirect to="/Inicio" />
         </Switch>
