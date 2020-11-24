@@ -4,7 +4,7 @@ import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 
 import "./Error.css";
 
-const Error = ({ mensaje, esconderError }) => {
+export const Error = ({ mensaje, esconderError }) => {
   if (!mensaje) {
     return null;
   }
@@ -21,4 +21,19 @@ const Error = ({ mensaje, esconderError }) => {
   );
 };
 
-export default Error;
+export const ErrorModal = ({ mensaje, esconderError }) => {
+  if (!mensaje) {
+    return null;
+  }
+
+  return (
+    <div className="ErrorContainerModal" role="alert">
+      <div className="Error__inner">
+        <span className="block">{mensaje}</span>
+        <button className="Error__button" onClick={esconderError}>
+          <FontAwesomeIcon className="Error__icon" icon={faTimesCircle} />
+        </button>
+      </div>
+    </div>
+  );
+};

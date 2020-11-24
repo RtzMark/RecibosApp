@@ -10,6 +10,17 @@
   border-radius: 0.25rem;
 }
 
+.ErrorContainerModal {
+  border-width: 1px;
+  z-index: 50;
+  background-color: #fcebea;
+  border-color: #ef5753;
+  margin-top: 1rem;
+  width: 100%;
+  color: #cc1f1a;
+  border-radius: 0.25rem;
+}
+
 .Error__inner {
   -webkit-align-items: center;
   align-items: center;
