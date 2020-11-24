@@ -16,12 +16,12 @@ export const initAxiosInterceptar = () => {
 
   Axios.interceptors.response.use(
     ({ data }) => data,
-    (error) => {
-      if (error.response.status === 401) {
+    ({ response }) => {
+      if (response.status === 401) {
         eliminarToken();
         window.location = "/login";
       } else {
-        return Promise.reject(error);
+        return response.data;
       }
     }
   );
