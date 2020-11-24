@@ -30,6 +30,11 @@ const Navbar = () => {
     <nav className="Nav">
       <ul className="Nav__links">
         <li>
+          <Link className="Nav__link" to="/">
+            Inicio
+          </Link>
+        </li>
+        <li className="Nav__link-margin-left">
           <Link className="Nav__link" to="/recibos">
             Recibos
           </Link>
