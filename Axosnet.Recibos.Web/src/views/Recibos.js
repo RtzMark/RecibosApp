@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import MaterialTable from "material-table";
 import Moment from "moment";
@@ -32,7 +32,8 @@ const Recibos = ({ setError }) => {
   const [errorModal, setErrorModal] = useState();
   const [accionRecibo, setAccionRecibo] = useState(true);
 
-  const ObtenerRecibos = async () => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const ObtenerRecibos = useCallback(async () => {
     setLoading(true);
     const { error, mensaje, datos } = await ObtenerRecibosAync();
 
@@ -43,11 +44,11 @@ const Recibos = ({ setError }) => {
       setListadoRecibo(datos);
     }
     setLoading(false);
-  };
+  });
 
   useEffect(() => {
     ObtenerRecibos();
-  }, []);
+  }, [ObtenerRecibos]);
 
   const handleInputChange = (e) => {
     setdatosRecibo({
