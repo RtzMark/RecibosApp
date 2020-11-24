@@ -44,7 +44,7 @@ const Recibos = ({ setError }) => {
       setListadoRecibo(datos);
     }
     setLoading(false);
-  });
+  }, [setError]);
 
   useEffect(() => {
     ObtenerRecibos();

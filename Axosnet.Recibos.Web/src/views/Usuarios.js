@@ -31,7 +31,6 @@ const Usuarios = ({ setError }) => {
   const [errorModal, setErrorModal] = useState();
   const [accionUsuario, setAccionUsuario] = useState(true);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const ObtenerUsuarios = useCallback(async () => {
     setLoading(true);
     const { error, mensaje, datos } = await ObtenerUsuariosAync();
@@ -43,7 +42,7 @@ const Usuarios = ({ setError }) => {
       setListadoUsuario(datos);
     }
     setLoading(false);
-  });
+  }, [setError]);
 
   useEffect(() => {
     ObtenerUsuarios();
