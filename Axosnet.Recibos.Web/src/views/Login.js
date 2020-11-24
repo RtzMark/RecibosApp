@@ -6,7 +6,7 @@ import { setToken } from "../auth/auth-helpers";
 import { types } from "../types/types";
 
 import Main from "../components/Main/Main";
-import Error from "../components/Errorbar/Error";
+import { Error } from "../components/Errorbar/Error";
 import Loading from "../components/Loading/Loading";
 
 const Login = () => {
@@ -95,7 +95,7 @@ const Login = () => {
                 onChange={handleInputChange}
                 value={datosLogin.clave}
               />
-              <button type="submit" className="Form__submit Login__Button">
+              <button type="submit" className="Form__submit">
                 Login
               </button>
             </form>
