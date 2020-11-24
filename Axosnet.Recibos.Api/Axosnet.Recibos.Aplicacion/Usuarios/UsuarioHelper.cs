@@ -95,10 +95,12 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
         {
             var respuesta = new Respuesta<Usuario>();
 
+            var existeUsuario = await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Id == usuario.Id);
+
+            usuario.Clave = (String.IsNullOrEmpty(usuario.Clave)) ? existeUsuario.Clave : Cifrado.EncryptSHA256(usuario.Clave);
+
             if (!_validador.Validate(usuario).IsValid)
                 throw new ErrorExcepcion(HttpStatusCode.BadRequest, "Favor de validar los campos");
-
-            var existeUsuario = await _context.Usuarios.AsNoTracking().FirstOrDefaultAsync(x => x.Id == usuario.Id);
 
             if (existeUsuario == null)
                 throw new ErrorExcepcion(HttpStatusCode.NotFound, "No existe el usuario que desea actualizar");
@@ -112,8 +114,6 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
                     respuesta.error = true;
                     respuesta.mensaje = "Ya existe email";
                 }
-
-                usuario.Clave = Cifrado.EncryptSHA256(usuario.Clave);
 
                 _context.Entry(usuario).State = EntityState.Modified;
 
