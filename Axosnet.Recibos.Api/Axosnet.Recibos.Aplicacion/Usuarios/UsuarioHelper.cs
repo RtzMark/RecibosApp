@@ -115,6 +115,7 @@ namespace Axosnet.Recibos.Aplicacion.Usuarios
                     respuesta.mensaje = "Ya existe email";
                 }
 
+                usuario.Activo = true;
                 _context.Entry(usuario).State = EntityState.Modified;
 
                 await _context.SaveChangesAsync();

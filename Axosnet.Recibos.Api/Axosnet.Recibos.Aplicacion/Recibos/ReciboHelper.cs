@@ -92,6 +92,7 @@ namespace Axosnet.Recibos.Aplicacion.Recibos
 
             try
             {
+                recibo.Activo = true;
                 _context.Entry(recibo).State = EntityState.Modified;
 
                 await _context.SaveChangesAsync();
