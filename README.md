@@ -14,3 +14,10 @@ La aplicacion es un sitio de administración de recibos. Utiliza una API persona
 - CRUD Recibos
 
 
+**Iniciar API:**
+
+- Update-database
+
+**Iniciar Web:**
+
+- npm i
