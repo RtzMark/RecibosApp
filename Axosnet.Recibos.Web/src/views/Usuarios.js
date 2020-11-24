@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 import MaterialTable from "material-table";
 
@@ -31,7 +31,8 @@ const Usuarios = ({ setError }) => {
   const [errorModal, setErrorModal] = useState();
   const [accionUsuario, setAccionUsuario] = useState(true);
 
-  const ObtenerUsuarios = async () => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const ObtenerUsuarios = useCallback(async () => {
     setLoading(true);
     const { error, mensaje, datos } = await ObtenerUsuariosAync();
 
@@ -42,11 +43,11 @@ const Usuarios = ({ setError }) => {
       setListadoUsuario(datos);
     }
     setLoading(false);
-  };
+  });
 
   useEffect(() => {
     ObtenerUsuarios();
-  }, []);
+  }, [ObtenerUsuarios]);
 
   const handleInputChange = (e) => {
     setDatosUsuario({
