@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { getToken, eliminarToken } from "../auth/auth-helpers";
 
-Axios.defaults.baseURL = "http://localhost:52234/api";
+Axios.defaults.baseURL = "https://recibos-api.azurewebsites.net/api";
 
 export const initAxiosInterceptar = () => {
   Axios.interceptors.request.use((config) => {
