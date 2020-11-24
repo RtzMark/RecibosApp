@@ -1,0 +1,54 @@
+.FormContainer {
+  max-width: 20rem;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  border-width: 1px;
+  border-color: #dae1e7;
+  padding: 4rem 2rem;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.Form__titulo {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.Form__field {
+  font-size: 0.875rem;
+  background-color: #f8fafc;
+  border-color: #dae1e7;
+  border-width: 1px;
+  border-radius: 0.125rem;
+  padding: 0.5rem 0.25rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.Form__submit {
+  display: block;
+  color: #fff;
+  background-color: #3490dc;
+  text-align: center;
+  border-radius: 0.25rem;
+  margin: 0.5rem auto 1rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+
+.Form__button {
+  color: #fff;
+  background-color: #3490dc;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  width: 15%;
+}
+
+.FormContainer__info {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #8795a1;
+  font-weight: 500;
+}

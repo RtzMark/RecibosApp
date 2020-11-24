@@ -29,7 +29,7 @@ namespace Axosnet.Recibos.Aplicacion.Acceso
 
             var usuario = _context.Usuarios.Where(x => x.Email == email && x.Clave == clave).FirstOrDefault();
 
-            if (usuario.Id == null || usuario.Id == new Guid())
+            if (usuario == null)
             {
                 respuesta.mensaje = "Email o contraseña incorrectos";
                 respuesta.error = true;
