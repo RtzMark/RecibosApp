@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import Navbar from "../components/Navbar/Navbar";
-import Error from "../components/Errorbar/Error";
+import { Error } from "../components/Errorbar/Error";
 
-import Recibos from "../views/Recibos/Recibos";
-import Usuarios from "../views/Usuarios/Usuarios";
+import Recibos from "../views/Recibos";
+import Usuarios from "../views/Usuarios";
+import Home from "../views/Home";
 
 const RutaTablero = () => {
   const [error, setError] = useState();
@@ -24,16 +25,16 @@ const RutaTablero = () => {
       <Error mensaje={error} esconderError={ocultarError} />
       <div>
         <Switch>
+          <Route path="/Inicio" render={(props) => <Home />} default />
           <Route
             path="/recibos"
             render={(props) => <Recibos mostrarError={mostrarError} />}
-            default
           />
           <Route
             path="/usuarios"
             render={(props) => <Usuarios mostrarError={mostrarError} />}
           />
-          <Redirect to="/recibos" />
+          <Redirect to="/Inicio" />
         </Switch>
       </div>
     </>
